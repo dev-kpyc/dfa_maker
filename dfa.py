@@ -5,17 +5,17 @@ Created on 2012-02-04
 @author: kevin
 '''
 def main():   
-    print("Enter your alphabet. Type ! when done")
+    print("Enter your alphabet.")
     alphabet = []
     char = input("{}: ".format(len(alphabet)))
-    while(char != '!'):
+    while(char != ''):
         alphabet.append(char)
         char = input("{}: ".format(len(alphabet)))
     
-    print("Enter your states. Type ! when done")
+    print("Enter your states.")
     states = []
     state = input("{}: ".format(len(states)))
-    while(state != '!'):
+    while(state != ''):
         states.append(state)
         state = input("{}: ".format(len(states)))
         
@@ -26,7 +26,7 @@ def main():
     print("Enter your finish states")
     finish_states = []
     fstate = input("{}: ".format(len(finish_states)))
-    while(fstate != '!'):
+    while(fstate != ''):
         try:
             states.index(fstate)
             finish_states.append(fstate)
@@ -43,19 +43,23 @@ def main():
             if transition != '':
                 transitions.append((s,a,transition))
     
-    print(len(alphabet))
-    for a in alphabet: print(a)
-    
-    print(len(states))
-    for s in states: print(s)
-    
-    print(start_state)
-    
-    print(len(finish_states))
-    for f in finish_states: print(f)
-    
-    print(len(transitions))
-    for t in transitions:
-        print("{} {} {}".format(t[0],t[1],t[2]))
+    outfile = input("Enter the output file name: ")
+    f = open(outfile,"w")
 
+    print(len(alphabet), end="\n", file=f)
+    for a in alphabet: print(a, end="\n", file=f)
+    
+    print(len(states), sep='', file=f)
+    for s in states: print(s, end="\n", file=f)
+    
+    print(start_state, end="\n", file=f)
+    
+    print(len(finish_states), end="\n", file=f)
+    for fs in finish_states: print(fs, end="\n", file=f)
+    
+    print(len(transitions), end="\n", file=f)
+    for t in transitions:
+        print("{} {} {}".format(t[0],t[1],t[2]), end="\n", file=f)
+    
+    f.close()
 if __name__ == "__main__": main()
